@@ -1,7 +1,42 @@
 doctype html
-html
+html(lang="pt-BR")
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title= title + " | Biblioteca"
+    link(rel="stylesheet", href="/stylesheets/style.css")
+
   body
-    block content
+
+    header
+      h1 Biblioteca Central
+      p Seu espaço de conhecimento e leitura
+
+    nav
+      ul
+        li
+          a(href="/") Inprodutosício
+        li
+          a(href="/quartos") Quartos
+        li
+          a(href="/reservas") Reservas
+        li
+          a(href="/servicos") Serviços
+        li
+          a(href="/contato") Contato
+
+    main
+      block content
+
+    section
+      h2 Nossos Diferenciais
+      ul
+        li Wi-Fi gratuito
+        li Café da manhã incluso
+        li Piscina e área de lazer
+        li Estacionamento gratuito
+
+    footer
+      p © 2026 Hotel Paradise
+      p Rua Exemplo, 123 • Centro
+      p Telefone: (00) 0000-0000

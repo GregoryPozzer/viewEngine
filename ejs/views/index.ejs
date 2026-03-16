@@ -1,11 +1,195 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>
+    <%= title %> - Portal Esportivo
+  </title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+    }
+
+    header {
+      background: #0b3d91;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background: #111;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #00ffae;
+    }
+
+    .container {
+      width: 90%;
+      margin: auto;
+      margin-top: 20px;
+    }
+
+    .destaque {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .noticias {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: #0b3d91;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: white;
+    }
+
+    table th,
+    table td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+
+    table th {
+      background: #0b3d91;
+      color: white;
+    }
+
+    footer {
+      margin-top: 30px;
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>
+      <%= title %>
+    </h1>
+    <p>Seu portal de notícias esportivas</p>
+  </header>
+
+  <nav>
+    <a href="#">Futebol</a>
+    <a href="#">Basquete</a>
+    <a href="#">Vôlei</a>
+    <a href="#">Esportes</a>
+    <a href="#">Resultados</a>
+  </nav>
+
+  <div class="container">
+
+    <section class="destaque">
+      <h2>🔥 Destaque do Dia</h2>
+      <p>
+        Grande jogo da rodada! O clássico terminou com muita emoção e gols
+        nos minutos finais.
+      </p>
+    </section>
+
+    <section>
+      <h2>📰 Últimas Notícias</h2>
+
+      <div class="noticias">
+
+        <div class="card">
+          <h3>Vitória importante</h3>
+          <p>Equipe vence por 2x1 e sobe na tabela do campeonato.</p>
+        </div>
+
+        <div class="card">
+          <h3>Transferência surpresa</h3>
+          <p>Jogador assina contrato com novo clube para a próxima temporada.</p>
+        </div>
+
+        <div class="card">
+          <h3>Recorde histórico</h3>
+          <p>Atleta quebra recorde e entra para a história do esporte.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <h2>📊 Próximos Jogos</h2>
+
+      <table>
+        <tr>
+          <th>Time Casa</th>
+          <th>Placar</th>
+          <th>Time Visitante</th>
+          <th>Data</th>
+        </tr>
+
+        <tr>
+          <td>Flamengo</td>
+          <td>vs</td>
+          <td>Palmeiras</td>
+          <td>20/03</td>
+        </tr>
+
+        <tr>
+          <td>Barcelona</td>
+          <td>vs</td>
+          <td>Real Madrid</td>
+          <td>21/03</td>
+        </tr>
+
+        <tr>
+          <td>Lakers</td>
+          <td>vs</td>
+          <td>Warriors</td>
+          <td>22/03</td>
+        </tr>
+
+      </table>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>© 2026 Portal Esportivo</p>
+  </footer>
+
+</body>
+
 </html>
