@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equinos de Corrida | Turf</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Barlow+Condensed:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --verde-turf:   #1a3a2a;
+            --verde-escuro: #0d2218;
+            --dourado:      #c9a84c;
+            --dourado-claro:#f0d080;
+            --creme:        #f5efe0;
+            --cinza-quente: #2e2a24;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Barlow Condensed', sans-serif;
+            background-color: var(--verde-escuro);
+            color: var(--creme);
+            min-height: 100vh;
+        }
+
+        /* ── HERO ────────────────────────────────────────────── */
+        .hero {
+            position: relative;
+            background: linear-gradient(160deg, var(--verde-escuro) 0%, #223d2e 60%, #0a1a12 100%);
+            padding: 0;
+            overflow: hidden;
+            border-bottom: 3px solid var(--dourado);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 70% 50% at 80% 50%, rgba(201,168,76,.08) 0%, transparent 70%),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 59px,
+                    rgba(201,168,76,.06) 59px,
+                    rgba(201,168,76,.06) 60px
+                );
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1100px;
+            margin: auto;
+            padding: 60px 40px 50px;
+            gap: 40px;
+        }
+
+        .hero-text { flex: 1; }
+
+        .hero-label {
+            display: inline-block;
+            font-size: .75rem;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: var(--dourado);
+            margin-bottom: 14px;
+            border-left: 3px solid var(--dourado);
+            padding-left: 10px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            line-height: 1.1;
+            color: var(--creme);
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--dourado-claro);
+        }
+
+        .hero-sub {
+            margin-top: 18px;
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: #b8cfb8;
+            max-width: 440px;
+            line-height: 1.6;
+        }
+
+        .hero-silhouette {
+            font-size: 9rem;
+            line-height: 1;
+            filter: drop-shadow(0 0 30px rgba(201,168,76,.3));
+            flex-shrink: 0;
+            animation: gallop 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes gallop {
+            from { transform: translateY(0px) rotate(-2deg); }
+            to   { transform: translateY(-12px) rotate(1deg); }
+        }
+
+        /* ── NAV ─────────────────────────────────────────────── */
+        nav {
+            background: var(--cinza-quente);
+            border-bottom: 1px solid rgba(201,168,76,.25);
+            padding: 0 40px;
+            display: flex;
+            gap: 0;
+        }
+
+        nav a {
+            color: #c8c0b0;
+            text-decoration: none;
+            font-size: .85rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            padding: 16px 22px;
+            display: block;
+            transition: color .2s, border-bottom-color .2s;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav a:hover, nav a.ativo {
+            color: var(--dourado-claro);
+            border-bottom-color: var(--dourado);
+        }
+
+        /* ── CONTAINER ───────────────────────────────────────── */
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 40px;
+            display: grid;
+            gap: 50px;
+        }
+
+        /* ── SECTION TITLE ───────────────────────────────────── */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--dourado-claro);
+            border-bottom: 1px solid rgba(201,168,76,.3);
+            padding-bottom: 12px;
+            margin-bottom: 28px;
+        }
+
+        /* ── CAMPEÕES GRID ───────────────────────────────────── */
+        .campeoes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .cavalo-card {
+            background: linear-gradient(145deg, #1e3d2d, #152a1f);
+            border: 1px solid rgba(201,168,76,.2);
+            border-radius: 4px;
+            padding: 24px 20px;
+            position: relative;
+            overflow: hidden;
+            transition: transform .25s, border-color .25s, box-shadow .25s;
+        }
+
+        .cavalo-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--dourado), var(--dourado-claro), var(--dourado));
+        }
+
+        .cavalo-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(201,168,76,.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,.4);
+        }
+
+        .cavalo-num {
+            font-size: 3rem;
+            font-weight: 600;
+            color: rgba(201,168,76,.15);
+            position: absolute;
+            top: 10px; right: 16px;
+            line-height: 1;
+        }
+
+        .cavalo-icone { font-size: 2rem; margin-bottom: 10px; }
+
+        .cavalo-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: var(--dourado-claro);
+            margin-bottom: 4px;
+        }
+
+        .cavalo-raca {
+            font-size: .8rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: #8aad8a;
+            margin-bottom: 12px;
+        }
+
+        .cavalo-card p {
+            font-size: .95rem;
+            color: #b8cdb8;
+            line-height: 1.55;
+            font-weight: 300;
+        }
+
+        .cavalo-stats {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(201,168,76,.15);
+        }
+
+        .stat { text-align: center; }
+
+        .stat-val {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dourado);
+        }
+
+        .stat-lbl {
+            display: block;
+            font-size: .7rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: #7a9a7a;
+        }
+
+        /* ── CORRIDAS TABLE ──────────────────────────────────── */
+        .tabela-corridas {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .95rem;
+        }
+
+        .tabela-corridas thead tr {
+            background: rgba(201,168,76,.12);
+        }
+
+        .tabela-corridas th {
+            padding: 14px 18px;
+            text-align: left;
+            font-size: .75rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--dourado);
+            border-bottom: 1px solid rgba(201,168,76,.3);
+            font-weight: 600;
+        }
+
+        .tabela-corridas td {
+            padding: 14px 18px;
+            border-bottom: 1px solid rgba(255,255,255,.05);
+            color: #c5d5c5;
+            font-weight: 300;
+        }
+
+        .tabela-corridas tbody tr:hover td {
+            background: rgba(201,168,76,.05);
+            color: var(--creme);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 2px;
+            font-size: .75rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .badge-gp  { background: rgba(201,168,76,.2); color: var(--dourado-claro); }
+        .badge-g1  { background: rgba(80,160,80,.2);  color: #7dda7d; }
+        .badge-cl  { background: rgba(80,120,200,.2); color: #80a8f0; }
+
+        /* ── CURIOSIDADES ─────────────────────────────────────── */
+        .curiosidades {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .curio-card {
+            background: rgba(255,255,255,.03);
+            border: 1px solid rgba(255,255,255,.07);
+            border-left: 4px solid var(--dourado);
+            border-radius: 2px 4px 4px 2px;
+            padding: 20px 22px;
+        }
+
+        .curio-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: var(--dourado-claro);
+            margin-bottom: 8px;
+        }
+
+        .curio-card p {
+            font-size: .9rem;
+            color: #9ab09a;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* ── FOOTER ──────────────────────────────────────────── */
+        footer {
+            margin-top: 60px;
+            background: var(--cinza-quente);
+            border-top: 1px solid rgba(201,168,76,.2);
+            text-align: center;
+            padding: 28px;
+        }
+
+        footer p { font-size: .85rem; color: #7a6a50; letter-spacing: .08em; }
+        footer strong { color: var(--dourado); }
+
+        /* ── RESPONSIVO ──────────────────────────────────────── */
+        @media (max-width: 640px) {
+            .hero-inner  { flex-direction: column; padding: 40px 24px 32px; }
+            .hero-silhouette { font-size: 5rem; }
+            nav          { padding: 0 16px; overflow-x: auto; }
+            .container   { padding: 0 20px; }
+            .tabela-corridas th,
+            .tabela-corridas td { padding: 10px 12px; font-size: .85rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-inner">
+            <div class="hero-text">
+                <span class="hero-label">Turfe &amp; Velocidade</span>
+                <h1>Equinos de<br><em>Corrida</em></h1>
+                <p class="hero-sub">
+                    O mundo fascinante dos cavalos puro-sangue, suas raças, recordes
+                    e as grandes provas que emocionam o Brasil e o mundo.
+                </p>
+            </div>
+            <div class="hero-silhouette">🐎</div>
+        </div>
+    </div>
+
+    <!-- NAV -->
+    <nav>
+        <a href="/" >Início</a>
+        <a href="/equinos" class="ativo">Equinos</a>
+        <a href="/igreja">Igreja</a>
+        <a href="/users">Usuários</a>
+    </nav>
+
+    <!-- CONTEÚDO -->
+    <div class="container">
+
+        <!-- CAMPEÕES -->
+        <section>
+            <h2 class="section-title">🏆 Campeões Lendários</h2>
+            <div class="campeoes-grid">
+
+                <div class="cavalo-card">
+                    <span class="cavalo-num">01</span>
+                    <div class="cavalo-icone">🥇</div>
+                    <h3>Secretariat</h3>
+                    <div class="cavalo-raca">Puro-Sangue Inglês · EUA</div>
+                    <p>Considerado o maior cavalo de corrida de todos os tempos. Em 1973 venceu a Tríplice Coroa americana com recordes que perduram até hoje.</p>
+                    <div class="cavalo-stats">
+                        <div class="stat"><span class="stat-val">21</span><span class="stat-lbl">Vitórias</span></div>
+                        <div class="stat"><span class="stat-val">2:24</span><span class="stat-lbl">Belmont (mi)</span></div>
+                        <div class="stat"><span class="stat-val">1973</span><span class="stat-lbl">Tríplice Coroa</span></div>
+                    </div>
+                </div>
+
+                <div class="cavalo-card">
+                    <span class="cavalo-num">02</span>
+                    <div class="cavalo-icone">⚡</div>
+                    <h3>Invasor</h3>
+                    <div class="cavalo-raca">Puro-Sangue Inglês · Argentina</div>
+                    <p>Bicampeão do G.P. Carlos Pellegrini. Um dos maiores campeões do turfe sul-americano, invicto por longos períodos de sua carreira.</p>
+                    <div class="cavalo-stats">
+                        <div class="stat"><span class="stat-val">25</span><span class="stat-lbl">Vitórias</span></div>
+                        <div class="stat"><span class="stat-val">2</span><span class="stat-lbl">GP Pellegrini</span></div>
+                        <div class="stat"><span class="stat-val">2006</span><span class="stat-lbl">Dubai World Cup</span></div>
+                    </div>
+                </div>
+
+                <div class="cavalo-card">
+                    <span class="cavalo-num">03</span>
+                    <div class="cavalo-icone">🌟</div>
+                    <h3>Caro Amico</h3>
+                    <div class="cavalo-raca">Puro-Sangue Inglês · Brasil</div>
+                    <p>Lenda do turfe nacional. Dominou o hipismo brasileiro nos anos 1970, sendo recordista no GP São Paulo e um ídolo popular incontestável.</p>
+                    <div class="cavalo-stats">
+                        <div class="stat"><span class="stat-val">30+</span><span class="stat-lbl">Vitórias</span></div>
+                        <div class="stat"><span class="stat-val">3</span><span class="stat-lbl">GP São Paulo</span></div>
+                        <div class="stat"><span class="stat-val">1970s</span><span class="stat-lbl">Era</span></div>
+                    </div>
+                </div>
+
+                <div class="cavalo-card">
+                    <span class="cavalo-num">04</span>
+                    <div class="cavalo-icone">🎖️</div>
+                    <h3>Frankel</h3>
+                    <div class="cavalo-raca">Puro-Sangue Inglês · Reino Unido</div>
+                    <p>Invicto em todas as suas 14 corridas. O cavalo mais bem classificado da história moderna pelo Timeform, com rating histórico de 147.</p>
+                    <div class="cavalo-stats">
+                        <div class="stat"><span class="stat-val">14</span><span class="stat-lbl">Corridas</span></div>
+                        <div class="stat"><span class="stat-val">147</span><span class="stat-lbl">Rating</span></div>
+                        <div class="stat"><span class="stat-val">100%</span><span class="stat-lbl">Aproveit.</span></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CALENDÁRIO DE PROVAS -->
+        <section>
+            <h2 class="section-title">📅 Grandes Provas do Calendário</h2>
+            <table class="tabela-corridas">
+                <thead>
+                    <tr>
+                        <th>Prova</th>
+                        <th>Local</th>
+                        <th>Distância</th>
+                        <th>Categoria</th>
+                        <th>Mês</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Grande Prêmio Brasil</strong></td>
+                        <td>Cidade Jardim, SP</td>
+                        <td>2.400 m</td>
+                        <td><span class="badge badge-gp">GP</span></td>
+                        <td>Maio</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Grande Prêmio São Paulo</strong></td>
+                        <td>Cidade Jardim, SP</td>
+                        <td>2.400 m</td>
+                        <td><span class="badge badge-gp">GP</span></td>
+                        <td>Novembro</td>
+                    </tr>
+                    <tr>
+                        <td><strong>GP Carlos Pellegrini</strong></td>
+                        <td>Palermo, Buenos Aires</td>
+                        <td>2.400 m</td>
+                        <td><span class="badge badge-g1">G1</span></td>
+                        <td>Dezembro</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kentucky Derby</strong></td>
+                        <td>Churchill Downs, EUA</td>
+                        <td>2.012 m</td>
+                        <td><span class="badge badge-g1">G1</span></td>
+                        <td>Maio</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dubai World Cup</strong></td>
+                        <td>Meydan, Dubai</td>
+                        <td>2.000 m</td>
+                        <td><span class="badge badge-g1">G1</span></td>
+                        <td>Março</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Prix de l'Arc de Triomphe</strong></td>
+                        <td>Longchamp, Paris</td>
+                        <td>2.400 m</td>
+                        <td><span class="badge badge-cl">CL</span></td>
+                        <td>Outubro</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- CURIOSIDADES -->
+        <section>
+            <h2 class="section-title">💡 Você Sabia?</h2>
+            <div class="curiosidades">
+                <div class="curio-card">
+                    <h4>Puro-Sangue Inglês</h4>
+                    <p>Toda linhagem Puro-Sangue Inglês do mundo descende de apenas três garanhões árabes importados para a Inglaterra entre 1680 e 1730: Byerley Turk, Darley Arabian e Godolphin Arabian.</p>
+                </div>
+                <div class="curio-card">
+                    <h4>Coração Gigante</h4>
+                    <p>O coração de um cavalo de corrida pesa em média 4 a 5 kg. O de Secretariat pesava 10 kg — mais que o dobro — o que explica em parte sua resistência excepcional.</p>
+                </div>
+                <div class="curio-card">
+                    <h4>Velocidade Máxima</h4>
+                    <p>Um puro-sangue pode atingir até 70 km/h em sprints curtos. A velocidade média numa corrida de 1.200 m de elite gira em torno de 60 km/h do início ao fim.</p>
+                </div>
+                <div class="curio-card">
+                    <h4>Turfe no Brasil</h4>
+                    <p>O turfe chegou ao Brasil com a família real portuguesa em 1808. O Jockey Club Brasileiro, fundado em 1868, é um dos mais tradicionais da América Latina.</p>
+                </div>
+                <div class="curio-card">
+                    <h4>Idade e Corridas</h4>
+                    <p>Cavalos de corrida competem principalmente entre 2 e 5 anos. No hemisfério norte, todos os puro-sangues comemoram aniversário em 1º de janeiro, independente do mês de nascimento.</p>
+                </div>
+                <div class="curio-card">
+                    <h4>Jóqueis</h4>
+                    <p>Os jóqueis são atletas de elite. Precisam manter peso máximo de 55 kg e suportam forças de até 3G durante as corridas. Uma carreira profissional exige anos de treinamento desde jovem.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 <strong>Portal Equinos</strong> · Parte do app <strong>appmusic</strong> com Handlebars</p>
+    </footer>
+
+</body>
+</html>
